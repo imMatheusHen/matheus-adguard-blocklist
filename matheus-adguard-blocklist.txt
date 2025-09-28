@@ -241,3 +241,136 @@
 |||www.googleadservices.com^
 |||www.jdoqocy.com^
 |||www.statcounter.com^
+# Google Ads/IMA extras
+||adservice.google.com^
+||adservice.google.com.br^
+||safeframe.googlesyndication.com^
+||securepubads.g.doubleclick.net^
+||adclick.g.doubleclick.net^
+||partnerad.l.doubleclick.net^
+# Meta / Facebook Audience Network (pode quebrar botões sociais)
+||an.facebook.com^
+||connect.facebook.net^$third-party
+||graph.facebook.com^$third-party
+# Amazon Ads (APS) / Amazon aax
+||amazon-adsystem.com^
+||aax.amazon-adsystem.com^
+||mads.amazon-adsystem.com^
+# Start.io (StartApp)
+||start.io^
+||startapp.com^
+||startappservice.com^
+# Tapjoy
+||tapjoy.com^
+||tapjoyads.com^
+# Appnext
+||appnext.com^
+# Ogury
+||ogury.io^
+||ogury.co^
+# Kidoz (infantil)
+||kidoz.net^
+# HyprMX
+||hyprmx.com^
+# Liftoff (Vungle group)
+||liftoff.io^
+# MoPub (legado, ainda chamado por apps)
+||ads.mopub.com^
+||analytics.mopub.com^
+# Twitter/X Ads
+||ads-api.twitter.com^
+||ads-twitter.com^
+||static.ads-twitter.com^
+# Reddit Ads
+||ads.reddit.com^
+||events.reddit.com^
+||pixel.reddit.com^
+# Pinterest Ads
+||ads.pinterest.com^
+||log.pinterest.com^
+# Snapchat Ads
+||ads.snapchat.com^
+||app-ads.snapchat.com^
+||tr.snapchat.com^
+# TikTok / ByteDance Ads (mais agressivo)
+||ads.tiktok.com^
+||analytics.tiktok.com^
+||business-api.tiktok.com^
+||log.byteoversea.com^
+||mcs.snssdk.com^
+# Yandex Ads
+||an.yandex.ru^
+||yandexadexchange.net^
+# Baidu Ads
+||pos.baidu.com^
+||cpro.baidu.com^
+# Microsoft Ads/telemetria publicitária
+||ads.msn.com^
+||c.msn.com^
+||bat.bing.com^
+# Huawei Ads (aparelhos Huawei)
+||ads.hicloud.com^
+||ads-dra.platform.hicloud.com^
+# Xiaomi telemetria/anúncios do sistema (MIUI)
+||ad.xiaomi.com^
+||api.ad.xiaomi.com^
+||data.mistat.xiaomi.com^
+# Atribuição/medição de apps (tracking de campanhas)
+||app-measurement.com^            # Firebase Analytics
+||appsflyersdk.com^
+||events.appsflyer.com^
+||adjust.world^
+||kochava.com^
+||singular.net^
+||tenjin.com^
+||branch.io^
+||bnc.lt^
+||a.applovin.com^
+||adcolony.com^
+||adtag.inmobi.com^
+||advertising.com^
+||advertising.inmobi.com^
+||applovin.com^
+||auction.unityads.unity3d.com^
+||chartboost.com^
+||config.unityads.unity3d.com^
+||criteo.com^
+||criteo.net^
+||d.applovin.com^
+||dtappn.com^
+||fyber.com^
+||imasdk.googleapis.com^
+||img.applovin.com^
+||inmobi.com^
+||ironsrc.com^
+||mintegral.com^
+||mintegral.net^
+||mopub.com^
+||oath.com^
+||outbrain.com^
+||pangle.io^
+||pubnative.net^
+||quantcount.com^
+||quantserve.com^
+||r.applovin.com^
+||sdk.inmobi.com^
+||serving-sys.com^
+||smaato.com^
+||smaato.net^
+||supersonicads.com^
+||taboola.com^
+||teads.tv^
+||unityads.unity3d.com^
+||vungle.com^
+||webview.unityads.unity3d.com^
+||yahoo.com^$third-party
+||cloudflare-dns.com^
+||dns-family.adguard.com^
+||dns.adguard.com^
+||dns.google^
+||dns.nextdns.io^
+||dns.quad9.net^
+||doh.applied-privacy.net^
+||doh.cleanbrowsing.org^
+||doh.opendns.com^
+||mozilla.cloudflare-dns.com^
