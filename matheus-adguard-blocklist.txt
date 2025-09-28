@@ -374,3 +374,83 @@
 ||doh.cleanbrowsing.org^
 ||doh.opendns.com^
 ||mozilla.cloudflare-dns.com^
+# TV/measurement
+||samba.tv^
+||api.samba.tv^
+||sdk.samba.tv^
+
+# Vídeo ads / SSPs usados em apps de TV
+||spotx.tv^
+||spotxchange.com^
+||springserve.com^
+||freewheel.tv^
+||fwmrm.net^
+||vidazoo.com^
+||vidoomy.com^
+
+# Content discovery que injeta cards/banners
+||taboola.com^
+||outbrain.com^
+||mgid.com^
+||revcontent.com^
+||zergnet.com^
+
+# InMobi (você viu no print)
+||inmobi.com^
+||advertising.inmobi.com^
+||adtag.inmobi.com^
+||sdk.inmobi.com^
+
+# SDKs de apps/jogos (comuns na TV também)
+||unityads.unity3d.com^
+||config.unityads.unity3d.com^
+||webview.unityads.unity3d.com^
+||auction.unityads.unity3d.com^
+||applovin.com^
+||a.applovin.com^
+||d.applovin.com^
+||r.applovin.com^
+||img.applovin.com^
+||ironsrc.com^
+||supersonicads.com^
+||vungle.com^
+||adcolony.com^
+||chartboost.com^
+||mintegral.com^
+||mintegral.net^
+||pangle.io^
+||smaato.com^
+||smaato.net^
+||pubnative.net^
+||fyber.com^
+||dtappn.com^
+||mopub.com^
+
+# Google Ads/IMA extras (além das que você já usa)
+||adservice.google.com^
+||adservice.google.com.br^
+||imasdk.googleapis.com^
+||safeframe.googlesyndication.com^
+||securepubads.g.doubleclick.net^
+||adclick.g.doubleclick.net^
+||partnerad.l.doubleclick.net^
+
+# Amazon/Meta/TikTok (muitos apps/TV usam)
+||amazon-adsystem.com^
+||aax.amazon-adsystem.com^
+||mads.amazon-adsystem.com^
+||an.facebook.com^
+||ads.tiktok.com^
+||analytics.tiktok.com^
+||business-api.tiktok.com^
+
+# Atribuição/analytics de apps (rastreamento de campanhas)
+||app-measurement.com^
+||events.appsflyer.com^
+||appsflyersdk.com^
+||adjust.world^
+||kochava.com^
+||singular.net^
+||tenjin.com^
+||branch.io^
+||bnc.lt^
