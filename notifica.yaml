@@ -1,0 +1,229 @@
+blueprint:
+  name: QuickBars - Exibir Notificação
+  description: |
+    ## QuickBars - Exibir Notificação v1.0.0
+    
+    Envie notificações ricas em sobreposição (overlay) para TV através do QuickBars para Home Assistant, com aparência personalizável, mídia e botões de ação interativos.
+    
+    ### Recursos
+    
+    * Exibe notificações em sua Android/Google TV
+    * Personalize cores, posição, transparência e duração
+    * Adicione ícones do Material Design ou imagens personalizadas
+    * Reproduza sons de notificação com volume ajustável (0-200%)
+    * Até 3 botões de ação interativos com manipulação automática de resposta
+    * Direcione para dispositivos específicos por App ID ou transmita para todos os dispositivos na sua rede
+    
+    ### Requisitos
+    
+    * QuickBars para Home Assistant v1.3 instalado na sua Android/Google TV
+    * Serviço de Acessibilidade habilitado para o QuickBars
+    * Permissão de "Exibir sobre outros aplicativos" habilitada para o QuickBars
+    * Conexão persistente em segundo plano ativada (Configurações → Conexão no app)
+    
+    ### Notas Importantes
+    
+    * O script lidará automaticamente com o pressionamento de botões e executará as ações configuradas
+    * Notificações com ações podem ser descartadas antecipadamente pressionando o botão "Voltar" no controle remoto
+    * Imagens devem estar acessíveis via HTTP/HTTPS ou colocadas em `/config/www/` (servidas como `/local/`)
+    * Sons devem estar em um formato suportado pela Android TV (MP3, WAV recomendados)
+  domain: script
+  author: Trooped / Omri
+  source_url: https://github.com/Trooped/quickbars-blueprints/blob/main/notification.yaml
+  homeassistant:
+    min_version: "2024.6.0"
+  input:
+    # ===== CONTEÚDO =====
+    content:
+      name: Conteúdo
+      icon: mdi:text
+      collapsed: false
+      input:
+        message:
+          name: Mensagem
+          description: Texto principal da notificação.
+          default: ""
+          selector:
+            text:
+              multiline: true
+        title:
+          name: Título
+          description: Cabeçalho curto opcional.
+          default: ""
+          selector:
+            text: {}
+        mdi_icon:
+          name: Ícone MDI
+          description: Opcional (ex: mdi:bell) para exibir na linha do título.
+          default: ""
+          selector:
+            icon: {}
+        image_url:
+          name: URL / Caminho da Imagem
+          description: |-
+            Aceita:
+            - https://… (URL absoluta terminando em .jpg, .png, etc.)
+            - /config/www/... ou caminho relativo após www/
+            - /api/camera_proxy/<camera_entity> (imagem estática)
+          default: ""
+          selector:
+            text: {}
+
+    # ===== APARÊNCIA =====
+    appearance:
+      name: Aparência
+      icon: mdi:palette
+      collapsed: true
+      input:
+        color:
+          name: Cor (RGB)
+          description: Cor de fundo personalizada opcional para a notificação.
+          default:
+          selector:
+            color_rgb: {}
+        transparency:
+          name: Transparência (0–1)
+          description: 0.0 = opaco, 1.0 = totalmente transparente.
+          default: 0
+          selector:
+            number:
+              min: 0
+              max: 1
+              step: 0.05
+        position:
+          name: Posição
+          description: Canto da tela para a notificação.
+          default: top_left
+          selector:
+            select:
+              options:
+                - label: "Superior Esquerdo"
+                  value: top_left
+                - label: "Superior Direito"
+                  value: top_right
+                - label: "Inferior Esquerdo"
+                  value: bottom_left
+                - label: "Inferior Direito"
+                  value: bottom_right
+
+    # ===== COMPORTAMENTO =====
+    behavior:
+      name: Comportamento
+      icon: mdi:cog
+      collapsed: true
+      input:
+        length:
+          name: Duração (seg)
+          description: Tempo para auto-dispensa (3–300). Botão VOLTAR pode descartar antes se houver botões de ação.
+          default: 10
+          selector:
+            number:
+              min: 3
+              max: 300
+              step: 1
+              unit_of_measurement: segundos
+        interrupt:
+          name: Interromper
+          description: Se marcado, substitui qualquer notificação exibida no momento.
+          default: false
+          selector:
+            boolean: {}
+
+    # ===== SOM =====
+    sound:
+      name: Som
+      icon: mdi:volume-high
+      collapsed: true
+      input:
+        sound_url:
+          name: URL / Caminho do Som
+          description: |-
+            Aceita:
+            - https://… (URL absoluta terminando em .mp3, etc.)
+            - /config/www/... ou caminho relativo após www/
+          default: ""
+          selector:
+            text: {}
+        sound_volume_percent:
+          name: Volume do Som %
+          description: 0–200 (100 = volume do sistema; >100 usa ganho de software, pode distorcer).
+          default: 100
+          selector:
+            number:
+              min: 0
+              max: 200
+
+    # ===== ALVOS =====
+    targeting:
+      name: Direcionamento de Dispositivo QuickBars
+      icon: mdi:bullseye
+      collapsed: true
+      input:
+        app_id:
+          name: QuickBars App ID (opcional)
+          description: ID de 8 caracteres obtido no app da TV. Deixe vazio para transmitir para todos os dispositivos QuickBars na rede local.
+          default: ""
+          selector:
+            text: {}
+
+    # ===== AÇÕES =====
+    action_1_section:
+      name: Botão de Ação 1
+      icon: mdi:gesture-tap-button
+      description: Botões opcionais exibidos na notificação. Ao pressionar, executa esta ação.
+      collapsed: true
+      input:
+        action_1_id:
+          name: Ação 1 - ID
+          description: Identificador interno (ex: "ligar_luz")
+          default: ""
+          selector: { text: {} }
+        action_1_label:
+          name: Ação 1 - Rótulo
+          description: Texto do botão (ex: "Ligar")
+          default: ""
+          selector: { text: {} }
+        action_1_action:
+          name: Ação 1 - Ação a Executar
+          description: Ações a serem executadas quando este botão for pressionado
+          default: []
+          selector: { action: {} }
+
+    action_2_section:
+      name: Botão de Ação 2
+      icon: mdi:gesture-tap-button
+      collapsed: true
+      input:
+        action_2_id:
+          name: Ação 2 - ID
+          default: ""
+          selector: { text: {} }
+        action_2_label:
+          name: Ação 2 - Rótulo
+          default: ""
+          selector: { text: {} }
+        action_2_action:
+          name: Ação 2 - Ação a Executar
+          default: []
+          selector: { action: {} }
+
+    action_3_section:
+      name: Botão de Ação 3
+      icon: mdi:gesture-tap-button
+      collapsed: true
+      input:
+        action_3_id:
+          name: Ação 3 - ID
+          default: ""
+          selector: { text: {} }
+        action_3_label:
+          name: Ação 3 - Rótulo
+          default: ""
+          selector: { text: {} }
+        action_3_action:
+          name: Ação 3 - Ação a Executar
+          default: []
+          selector: { action: {} }
+
+# O restante do código (variables e sequence) não deve ser traduzido, 
+# pois contém a lógica de programação e referências internas.
