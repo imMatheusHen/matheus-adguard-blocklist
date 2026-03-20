@@ -7,12 +7,12 @@ blueprint:
     
     ### Recursos
     
-    * Exibe notificações em sua Android/Google TV
-    * Personalize cores, posição, transparência e duração
-    * Adicione ícones do Material Design ou imagens personalizadas
-    * Reproduza sons de notificação com volume ajustável (0-200%)
+    * Exibir notificações em sua Android/Google TV
+    * Personalizar cores, posição, transparência e duração
+    * Adicionar ícones do Material Design ou imagens personalizadas
+    * Reproduzir sons de notificação com volume ajustável (0-200%)
     * Até 3 botões de ação interativos com manipulação automática de resposta
-    * Direcione para dispositivos específicos por App ID ou transmita para todos os dispositivos na sua rede
+    * Direcionar para dispositivos específicos por App ID ou transmitir para todos os dispositivos na sua rede
     
     ### Requisitos
     
@@ -41,20 +41,20 @@ blueprint:
       input:
         message:
           name: Mensagem
-          description: Texto principal da notificação.
+          description: 'Texto principal da notificação.'
           default: ""
           selector:
             text:
               multiline: true
         title:
           name: Título
-          description: Cabeçalho curto opcional.
+          description: 'Cabeçalho curto opcional.'
           default: ""
           selector:
             text: {}
         mdi_icon:
           name: Ícone MDI
-          description: Opcional (ex: mdi:bell) para exibir na linha do título.
+          description: 'Opcional (ex: mdi:bell) para exibir na linha do título.'
           default: ""
           selector:
             icon: {}
@@ -77,13 +77,13 @@ blueprint:
       input:
         color:
           name: Cor (RGB)
-          description: Cor de fundo personalizada opcional para a notificação.
+          description: 'Cor de fundo personalizada opcional para a notificação.'
           default:
           selector:
             color_rgb: {}
         transparency:
           name: Transparência (0–1)
-          description: 0.0 = opaco, 1.0 = totalmente transparente.
+          description: '0.0 = opaco, 1.0 = totalmente transparente.'
           default: 0
           selector:
             number:
@@ -92,19 +92,15 @@ blueprint:
               step: 0.05
         position:
           name: Posição
-          description: Canto da tela para a notificação.
+          description: 'Canto da tela para a notificação.'
           default: top_left
           selector:
             select:
               options:
-                - label: "Superior Esquerdo"
-                  value: top_left
-                - label: "Superior Direito"
-                  value: top_right
-                - label: "Inferior Esquerdo"
-                  value: bottom_left
-                - label: "Inferior Direito"
-                  value: bottom_right
+                - top_left
+                - top_right
+                - bottom_left
+                - bottom_right
 
     # ===== COMPORTAMENTO =====
     behavior:
@@ -114,7 +110,7 @@ blueprint:
       input:
         length:
           name: Duração (seg)
-          description: Tempo para auto-dispensa (3–300). Botão VOLTAR pode descartar antes se houver botões de ação.
+          description: 'Tempo para auto-dispensa (3–300). Botão VOLTAR pode descartar antes se houver botões de ação.'
           default: 10
           selector:
             number:
@@ -124,7 +120,7 @@ blueprint:
               unit_of_measurement: segundos
         interrupt:
           name: Interromper
-          description: Se marcado, substitui qualquer notificação exibida no momento.
+          description: 'Se verdadeiro, substitui qualquer notificação exibida no momento.'
           default: false
           selector:
             boolean: {}
@@ -146,7 +142,7 @@ blueprint:
             text: {}
         sound_volume_percent:
           name: Volume do Som %
-          description: 0–200 (100 = volume do sistema; >100 usa ganho de software, pode distorcer).
+          description: '0–200 (100 = volume do sistema; >100 usa ganho de software, pode distorcer).'
           default: 100
           selector:
             number:
@@ -161,7 +157,7 @@ blueprint:
       input:
         app_id:
           name: QuickBars App ID (opcional)
-          description: ID de 8 caracteres obtido no app da TV. Deixe vazio para transmitir para todos os dispositivos QuickBars na rede local.
+          description: 'ID de 8 caracteres obtido no app da TV. Deixe vazio para transmitir a todos os dispositivos na rede.'
           default: ""
           selector:
             text: {}
@@ -170,26 +166,27 @@ blueprint:
     action_1_section:
       name: Botão de Ação 1
       icon: mdi:gesture-tap-button
-      description: Botões opcionais exibidos na notificação. Ao pressionar, executa esta ação.
+      description: 'Botões opcionais exibidos na notificação. Ao pressionar, executa esta ação.'
       collapsed: true
       input:
         action_1_id:
           name: Ação 1 - ID
-          description: Identificador interno (ex: "ligar_luz")
+          description: 'Identificador interno (ex: "ligar_luz")'
           default: ""
           selector: { text: {} }
         action_1_label:
           name: Ação 1 - Rótulo
-          description: Texto do botão (ex: "Ligar")
+          description: 'Texto do botão (ex: "Ligar")'
           default: ""
           selector: { text: {} }
         action_1_action:
           name: Ação 1 - Ação a Executar
-          description: Ações a serem executadas quando este botão for pressionado
+          description: 'Ação opcional para executar ao pressionar o botão'
           default: []
           selector: { action: {} }
 
     action_2_section:
+      description: 'Botões opcionais exibidos na notificação. Ao pressionar, executa esta ação.'
       name: Botão de Ação 2
       icon: mdi:gesture-tap-button
       collapsed: true
@@ -209,6 +206,7 @@ blueprint:
 
     action_3_section:
       name: Botão de Ação 3
+      description: 'Botões opcionais exibidos na notificação. Ao pressionar, executa esta ação.'
       icon: mdi:gesture-tap-button
       collapsed: true
       input:
@@ -225,5 +223,200 @@ blueprint:
           default: []
           selector: { action: {} }
 
-# O restante do código (variables e sequence) não deve ser traduzido, 
-# pois contém a lógica de programação e referências internas.
+# Expose inputs to templates as variables
+variables:
+  app_id: !input app_id
+  title: !input title
+  message: !input message
+  action_1_id: !input action_1_id
+  action_1_label: !input action_1_label
+  action_1_action: !input action_1_action
+  action_2_id: !input action_2_id
+  action_2_label: !input action_2_label
+  action_2_action: !input action_2_action
+  action_3_id: !input action_3_id
+  action_3_label: !input action_3_label
+  action_3_action: !input action_3_action
+  color: !input color
+  transparency: !input transparency
+  position: !input position
+  length: !input length
+  interrupt: !input interrupt
+  mdi_icon: !input mdi_icon
+  image_url: !input image_url
+  sound_url: !input sound_url
+  sound_volume_percent: !input sound_volume_percent
+  _cid: "{{ now().timestamp() | int ~ '-' ~ (range(1000,9999) | random) }}"
+
+sequence:
+  # Guard: message must not be empty
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ (message | string | trim) == '' }}"
+        sequence:
+          - stop: Por favor, forneça uma mensagem.
+
+  # Normalize image URL (allow http/https, /api/**, /local/**, /config/www/**, bare paths)
+  - variables:
+      _img_raw: "{{ (image_url | default('')) | string }}"
+      _img_url: >-
+        {%- set s = _img_raw.strip() -%}
+        {%- if s.startswith('http://') or s.startswith('https://') -%}
+          {{ s }}
+        {%- elif s.startswith('/api/') or s.startswith('/local/') -%}
+          {{ s }}
+        {%- elif s.startswith('/config/www/') -%}
+          /local/{{ s.split('/config/www/')[1] }}
+        {%- elif s.startswith('config/www/') -%}
+          /local/{{ s.split('config/www/')[1] }}
+        {%- elif s.startswith('/www/') -%}
+          /local/{{ s.split('/www/')[1] }}
+        {%- elif s.startswith('www/') -%}
+          /local/{{ s.split('www/')[1] }}
+        {%- elif s and not s.startswith('/') -%}
+          /local/{{ s.lstrip('/') }}
+        {%- else -%}{% endif %}
+
+  # Normalize sound URL (allow http/https, /local/**, /config/www/**, bare paths; block /api & /media)
+  - variables:
+      _snd_raw: "{{ (sound_url | default('')) | string }}"
+      _snd_trim: "{{ _snd_raw.strip() }}"
+      _snd_norm: >-
+        {%- set s = _snd_trim -%}
+        {%- if s.startswith('http://') or s.startswith('https://') -%}
+          {{ s }}
+        {%- elif s.startswith('/local/') -%}
+          {{ s }}
+        {%- elif s.startswith('/config/www/') -%}
+          /local/{{ s.split('/config/www/')[1] }}
+        {%- elif s.startswith('config/www/') -%}
+          /local/{{ s.split('config/www/')[1] }}
+        {%- elif s.startswith('/www/') -%}
+          /local/{{ s.split('/www/')[1] }}
+        {%- elif s.startswith('www/') -%}
+          /local/{{ s.split('www/')[1] }}
+        {%- elif s and not s.startswith('/') -%}
+          /local/{{ s.lstrip('/') }}
+        {%- else -%}{% endif %}
+      _snd_blocked: |-
+        {{ _snd_trim.startswith('/media/local/')
+            or _snd_trim.startswith('media/local/')
+            or _snd_trim.startswith('media-source://')
+            or _snd_trim.startswith('/api/') }}
+      _snd_pct: "{{ (sound_volume_percent | default(100)) | int }}"
+
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ _snd_trim and _snd_blocked }}"
+        sequence:
+          - action: system_log.write
+            data:
+              level: warning
+              message: >-
+                QuickBars TV Notify: sound_url "{{ _snd_trim }}" requires HA
+                auth (/media or /api) and is not supported by TV player. Move
+                the file to /config/www and use /local/…, or use https://.
+
+  - variables:
+      _ev: |-
+        {{
+          dict(
+            title=title, 
+            message=message, 
+            actions=(
+              [
+                dict(id=action_1_id, label=action_1_label)
+              ] if (action_1_id | string | trim) else []
+            ) + (
+              [
+                dict(id=action_2_id, label=action_2_label)
+              ] if (action_2_id | string | trim) else []
+            ) + (
+              [
+                dict(id=action_3_id, label=action_3_label)
+              ] if (action_3_id | string | trim) else []
+            ),
+            duration=(length | int), 
+            position=position,
+            color=color, 
+            transparency=(transparency | float(0)),
+            interrupt=interrupt, cid=_cid
+          )
+          | combine( dict(mdi_icon=mdi_icon) if (mdi_icon | string | trim) else {} )
+          | combine( dict(image_url=_img_url) if _img_url|default('') else {} )
+          | combine( dict(sound_url=_snd_norm) if _snd_norm|default('') and not _snd_blocked else {} )
+          | combine( dict(sound_volume_percent=_snd_pct) if _snd_norm|default('') and not _snd_blocked else {} )
+        }}
+
+  - choose:
+        - conditions:
+            - condition: template
+              value_template: "{{ (app_id | string | trim) | length > 0 }}"
+          sequence:
+            - event: quickbars.notify
+              event_data:
+                id: "{{ app_id }}"
+                title: "{{ _ev.title }}"
+                message: "{{ _ev.message }}"
+                actions: "{{ _ev.actions }}"
+                duration: "{{ _ev.duration }}"
+                position: "{{ _ev.position }}"
+                color: "{{ _ev.color }}"
+                transparency: "{{ _ev.transparency }}"
+                interrupt: "{{ _ev.interrupt }}"
+                cid: "{{ _ev.cid }}"
+                mdi_icon: "{{ _ev.mdi_icon if _ev.get('mdi_icon') else omit }}"
+                image_url: "{{ _ev.image_url if _ev.get('image_url') else omit }}"
+                sound_url: "{{ _ev.sound_url if _ev.get('sound_url') else omit }}"
+                sound_volume_percent: "{{ _ev.sound_volume_percent if _ev.get('sound_volume_percent') else omit }}"
+    default:
+        - event: quickbars.notify
+          event_data:
+            title: "{{ _ev.title }}"
+            message: "{{ _ev.message }}"
+            actions: "{{ _ev.actions }}"
+            duration: "{{ _ev.duration }}"
+            position: "{{ _ev.position }}"
+            color: "{{ _ev.color }}"
+            transparency: "{{ _ev.transparency }}"
+            interrupt: "{{ _ev.interrupt }}"
+            cid: "{{ _ev.cid }}"
+            mdi_icon: "{{ _ev.mdi_icon if _ev.get('mdi_icon') else omit }}"
+            image_url: "{{ _ev.image_url if _ev.get('image_url') else omit }}"
+            sound_url: "{{ _ev.sound_url if _ev.get('sound_url') else omit }}"
+            sound_volume_percent: "{{ _ev.sound_volume_percent if _ev.get('sound_volume_percent') else omit }}"
+
+  - wait_for_trigger:
+      - trigger: event
+        event_type: quickbars.action
+    timeout:
+      seconds: "{{ length if length > 0 else 300 }}"
+    continue_on_timeout: false
+
+  - variables:
+      _action_id: "{{ wait.trigger.event.data.action_id | default('') }}"
+      _trigger_cid: "{{ wait.trigger.event.data.cid | default('') }}"
+
+  - condition: template
+    value_template: "{{ _trigger_cid == _cid }}"
+
+  - choose:
+      # Action 1
+      - conditions:
+          - condition: template
+            value_template: "{{ _action_id == action_1_id and action_1_action | length > 0 }}"
+        sequence: !input action_1_action
+      
+      # Action 2
+      - conditions:
+          - condition: template
+            value_template: "{{ _action_id == action_2_id and action_2_action | length > 0 }}"
+        sequence: !input action_2_action
+      
+      # Action 3
+      - conditions:
+          - condition: template
+            value_template: "{{ _action_id == action_3_id and action_3_action | length > 0 }}"
+        sequence: !input action_3_action
