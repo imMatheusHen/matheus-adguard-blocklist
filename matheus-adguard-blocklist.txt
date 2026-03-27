@@ -428,3 +428,4 @@
 ||googleads.g.doubleclick.net^
 ||cloudflareinsights.com^
 ||cleverwebserver.com^
+||amd-cdn-1.*.com^
