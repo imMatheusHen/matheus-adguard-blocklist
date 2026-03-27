@@ -497,3 +497,15 @@
 ||smartlook.cloud^
 ||byteoversea.com^
 ||rayjump.com^
+||doubleclick.net^
+||googlesyndication.com^$third-party
+||googleads.g.doubleclick.net^$third-party
+||adservice.google.com^
+||securepubads.g.doubleclick.net^
+||amd-cdn-1.fb7df5a*.com^
+||4d254bed2.com^
+||googlesyndication.com^
+||googleads.g.doubleclick.net^
+||pagead2.googlesyndication.com^
+||cloudflareinsights.com^
+||cleverwebserver.com^
